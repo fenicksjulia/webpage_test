@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Yoga Life — бесплатное занятие</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-eduwell-style.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+</head>
+<body>
+  <section class="main-banner" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="header-text">
+            <h6>Yoga Life</h6>
+            <h2>Присоединяйся к нашему открытому занятию в эту субботу в 10:00 в студии Yoga Life!</h2>
+            <div class="yoga-description">
+              Почувствуй, как исчезает напряжение, возвращается энергия и появляется лёгкость - всё это возможно всего за одно занятие.<br>
+              Мы приглашаем тебя совершенно бесплатно - просто зарегистрируйся ниже 🌿
+            </div>
+            <div class="main-button-gradient">
+              <div class="scroll-to-section"><a href="#yoga-form">Записаться бесплатно</a></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="right-image">
+            <img src="../images/45d69252-9f51-11ee-983f-6ed74e5cd707.1220x600.jpeg" alt="Йога занятие">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="contact-us" id="yoga-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h6>Регистрация на бесплатное занятие</h6>
+            <h4>Заполни форму ниже</h4>
+            <p>Оставь свои данные, и мы свяжемся с тобой для подтверждения участия.</p>
+          </div>
+          <form id="yoga-registration" action="https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjYwNTY4MDYzMTA0MzI1MjZiNTUzMjUxMzMi_pc" method="POST" class="modern-form">
+            <div class="row">
+              <div class="col-lg-12">
+                <fieldset class="input-group mb-4">
+                  <span class="input-group-text bg-white border-end-0"><i class="fa fa-user"></i></span>
+                  <input type="text" name="fio" id="fio" placeholder="ФИО" required class="form-control form-control-lg border-start-0 modern-input">
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset class="input-group mb-4">
+                  <span class="input-group-text bg-white border-end-0"><i class="fa fa-phone"></i></span>
+                  <input type="tel" name="phone" id="phone" placeholder="Телефон" required pattern="[0-9\-\+\s\(\)]{10,}" class="form-control form-control-lg border-start-0 modern-input">
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" class="main-gradient-button w-100 py-3 modern-btn">Записаться</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+          <div id="success-dialog" title="Регистрация успешна!" style="display:none;">
+            <p>Спасибо за регистрацию! Мы свяжемся с вами для подтверждения участия.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+  <script>
+    $(function() {
+      $("#fio, #phone").addClass("ui-state-default ui-corner-all");
+      $("#fio, #phone").focus(function() {
+        $(this).addClass("ui-state-focus");
+      }).blur(function() {
+        $(this).removeClass("ui-state-focus");
+      });
+      // AJAX-отправка формы и показ модального окна
+      $("#yoga-registration").on("submit", function(e) {
+        e.preventDefault();
+        var $form = $(this);
+        $.ajax({
+          url: $form.attr('action'),
+          type: $form.attr('method'),
+          data: $form.serialize(),
+          success: function() {
+            $("#success-dialog").dialog({
+              modal: true,
+              buttons: {
+                "Ок": function() {
+                  $(this).dialog("close");
+                }
+              },
+              close: function() {
+                $form[0].reset();
+              }
+            });
+          },
+          error: function() {
+            alert('Произошла ошибка при отправке. Попробуйте ещё раз.');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
